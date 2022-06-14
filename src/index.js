@@ -69,19 +69,15 @@ function getPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let units = "imperial";
-  //let apiUrl = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-  // get the city name then change it
-  //axios.get(`${apiUrl}`).then(changeCityName);
-  // change the temp
-  //let apiUrl2 = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
-  // axios.get(`${apiUrl2}`).then(setTemp);
-  axios.get(`${apiUrl}`).then(setTemp);
   axios.get(`${apiUrl}`).then(changeCityName);
+  axios.get(`${apiUrl}`).then(setTemp);
 }
 
 function changeCityName(response) {
   // get the input city name
+  console.log(response.data.name);
+    console.log(response);
   let myCity = document.querySelector("#cityName");
   myCity.innerHTML = response.data[0].name;
 }
