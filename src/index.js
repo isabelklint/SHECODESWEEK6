@@ -80,7 +80,7 @@ function getPosition(position) {
 function changeCityName(response) {
   // get the input city name
   let myCity = document.querySelector("#cityName");
-  myCity.innerHTML = response.data[0].name
+  myCity.innerHTML = response.data[0].name;
 }
 
 // SET TEMP
