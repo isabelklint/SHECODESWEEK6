@@ -2,7 +2,14 @@
 
 // SET TIME
 let now = new Date();
+let hr = now.getHours();
+
 let min = now.getMinutes();
+if (min < 10) {
+  min = `0${min}`;
+}
+let timeNow = `${hr}:${min}`;
+span.innerHTML = `${dayName} ${timeNow}`;
 
 let dayNames = [
   "Sunday",
@@ -18,11 +25,7 @@ let dayName = dayNames[now.getDay()];
 
 let span = document.querySelector("#showTime");
 
-if (min < 10) {
-  min = `0${min}`;
-  let hr = now.getHours();
-  let timeNow = `${hr}:${min}`;
-  span.innerHTML = `${dayName} ${timeNow}`;
+
 } else {
   let hr = now.getHours();
   let timeNow = `${hr}:${min}`;
@@ -69,18 +72,21 @@ function getPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let units = "imperial";
-  let apiUrl = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-  // get the city name then change it
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
   axios.get(`${apiUrl}`).then(changeCityName);
-  // change the temp
-  let apiUrl2 = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
-  axios.get(`${apiUrl2}`).then(setTemp);
+  axios.get(`${apiUrl}`).then(setTemp);
 }
 
 function changeCityName(response) {
   // get the input city name
   let myCity = document.querySelector("#cityName");
+<<<<<<< HEAD
   myCity.innerHTML = response.data[0].name;
+||||||| merged common ancestors
+  myCity.innerHTML = response.data[0].name
+=======
+  myCity.innerHTML = response.data.name;
+>>>>>>> 050a3b8d6ec549811972a46eafca3893748ef899
 }
 
 // SET TEMP
